@@ -303,7 +303,7 @@ public class Ri2D_6832 extends OpMode {
      */
     @Override
     public void init() {
-
+        telemetry.addLine("this is a system.out.prinlnt from init");
         telemetry.addData("Status", "Initializing " + currentBot + "...");
         telemetry.addData("Status", "Hold right_trigger to enable debug mode");
         telemetry.update();
@@ -316,7 +316,7 @@ public class Ri2D_6832 extends OpMode {
         logger = new CsvLogKeeper("test",3,"tps, armTicks, targetDistance");
 
 
-        debugTelemetry = gamepad1.right_trigger > .3;
+        //debugTelemetry = gamepad1.right_trigger > .3;
         debugTelemetry = true;
         if (debugTelemetry)
             configureDashboardDebug();
@@ -457,6 +457,7 @@ public class Ri2D_6832 extends OpMode {
          */
         @Override
         public void start() {
+            telemetry.addLine("this is println from start");
             runtime.reset();
 
 
@@ -478,6 +479,7 @@ public class Ri2D_6832 extends OpMode {
      */
     @Override
     public void loop() {
+        telemetry.addLine("this is system println from loop");
         //orange
             stateSwitch();
             if (active) {
@@ -558,6 +560,7 @@ public class Ri2D_6832 extends OpMode {
 
     private void joystickDrive() { //apple
 
+        telemetry.addLine("this is println from joystickdrive");
         if (!joystickDriveStarted) {
             joystickDriveStarted = true;
             robot.blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_RAINBOW_PALETTE);
