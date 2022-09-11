@@ -103,6 +103,8 @@ public class Ri2D_6832 extends OpMode {
     // sensors/sensing-related variables
     private Orientation angles;
 
+    //toggle variables
+    private boolean a_pressed_last_loop = false;
     // these are meant as short term testing variables, don't expect their usage
     // to be consistent across development sessions
     // private double testableDouble = robot.kpDrive;
@@ -608,15 +610,19 @@ public class Ri2D_6832 extends OpMode {
             robot.driveMixerMec(pwrFwd * pwrDamper, pwrStf, pwrRot);
         }
 
-        if(toggleAllowed(gamepad1.x,x,1)) {
-            robot.toggleDuckSpinner();
+        if(gamepad1.x) {
+            //robot.toggleDuckSpinner();
         }
-
-        if(toggleAllowed(gamepad1.a,a,1)){
-            robot.lnc.toggleGripper();
+       
+        if(gamepad1.a) {
+            if(!a_pressed_last_loop) robot.lnc.toggleGripper();
         }
-
-        if(toggleAllowed(gamepad1.y,y,1)){
+        else{
+            if(a_pressed_last_loop) robot.lnc.toggleGripper();
+        }
+        telemetry.addLine(""+toggleAllowed(gamepad1.a,a,1));
+        telemetry.addLine(""+gamepad1.a);
+        if(gamepad1.y){
             robot.lnc.toggleLiftHeight();
         }
     }
